@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Code2, ArrowRight, Download, Mail } from "lucide-react";
 import profileAsset from "@/assets/profile.jpeg.asset.json";
+import resumeAsset from "@/assets/resume.pdf.asset.json";
 
 export function Hero() {
   return (
@@ -40,8 +41,10 @@ export function Hero() {
                 View Projects <ArrowRight className="h-4 w-4" />
               </a>
               <a
-                href="/resume.pdf"
-                download
+                href={resumeAsset.url}
+                download="Sai_Harish_Resume.pdf"
+                target="_blank"
+                rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-md hairline bg-surface px-5 py-2.5 text-sm font-medium text-foreground hover:bg-surface-elevated transition"
               >
                 <Download className="h-4 w-4" /> Download Resume
