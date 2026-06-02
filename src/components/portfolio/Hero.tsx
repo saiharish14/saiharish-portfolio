@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Code2, ArrowRight, Download, Mail } from "lucide-react";
+import profileAsset from "@/assets/profile.jpeg.asset.json";
 
 export function Hero() {
   return (
@@ -90,17 +91,15 @@ export function Hero() {
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
             className="relative mx-auto lg:mx-0 lg:ml-auto"
           >
-            <div className="relative h-64 w-64 sm:h-80 sm:w-80">
-              <div className="absolute inset-0 rounded-2xl hairline bg-surface" />
-              <div className="absolute inset-0 grid place-items-center">
-                <div className="text-center">
-                  <div className="text-7xl sm:text-8xl font-semibold tracking-tight text-primary">
-                    SH
-                  </div>
-                  <div className="mt-3 font-mono text-[11px] uppercase tracking-[0.3em] text-muted-foreground">
-                    Sai Harish · CSE '27
-                  </div>
-                </div>
+            <div className="relative h-72 w-72 sm:h-80 sm:w-80">
+              <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-primary/30 via-primary/10 to-transparent blur-2xl" />
+              <div className="relative h-full w-full overflow-hidden rounded-2xl hairline bg-surface">
+                <img
+                  src={profileAsset.url}
+                  alt="Tiruvidhula Sai Harish"
+                  className="h-full w-full object-cover"
+                  loading="eager"
+                />
               </div>
               <div className="absolute -bottom-3 -right-3 rounded-md hairline bg-surface-elevated px-3 py-1.5 text-xs text-muted-foreground font-mono">
                 Guntur, AP
