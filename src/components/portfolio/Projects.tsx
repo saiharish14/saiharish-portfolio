@@ -240,15 +240,15 @@ export function Projects() {
         ))}
       </div>
 
-      {/* Second row: 2 cards centered on desktop */}
+      {/* Second row: 2 cards centered on desktop (same width as first-row cards) */}
       <div className="mt-5 md:mt-6 grid sm:grid-cols-2 lg:grid-cols-6 gap-5 md:gap-6">
         {secondRow.map((p, i) => (
           <div
             key={p.title}
             className={
               i === 0
-                ? "lg:col-span-3 lg:col-start-1 xl:col-start-2"
-                : "lg:col-span-3 xl:col-span-3"
+                ? "lg:col-span-2 lg:col-start-2"
+                : "lg:col-span-2"
             }
           >
             <ProjectCard p={p} onStatus={() => setStatusOpen(true)} />
