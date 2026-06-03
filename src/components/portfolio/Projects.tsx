@@ -3,14 +3,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Github,
   ExternalLink,
-  Sprout,
+  Leaf,
   Fuel,
-  HeartPulse,
+  Stethoscope,
   Home,
-  UtensilsCrossed,
+  Utensils,
   Star,
   Wrench,
   X,
+  CircleDot,
+  FolderGit2,
 } from "lucide-react";
 import { Section } from "./Section";
 
@@ -21,7 +23,8 @@ type Project = {
   github?: string;
   demo?: string;
   featured?: boolean;
-  status?: "under-development";
+  status?: "under-development" | "live";
+  repoAvailable?: boolean;
   icon: React.ComponentType<{ className?: string }>;
   gradient: string;
 };
@@ -36,7 +39,8 @@ const projects: Project[] = [
     stack: ["Python", "Machine Learning", "HTML5", "CSS3", "JavaScript"],
     github: "https://github.com/saiharish14/Crop-Disease-Prediction",
     featured: true,
-    icon: Sprout,
+    repoAvailable: true,
+    icon: Leaf,
     gradient: "from-emerald-500/30 via-emerald-400/10 to-transparent",
   },
   {
@@ -48,6 +52,7 @@ const projects: Project[] = [
     stack: ["HTML5", "CSS3", "JavaScript", "Chart.js"],
     demo: "https://smart-fuel.netlify.app/",
     featured: true,
+    status: "live",
     icon: Fuel,
     gradient: "from-amber-500/30 via-orange-400/10 to-transparent",
   },
@@ -59,7 +64,7 @@ const projects: Project[] = [
     ],
     stack: ["Python", "Flask", "SQLite", "HTML5", "CSS3", "JavaScript"],
     status: "under-development",
-    icon: HeartPulse,
+    icon: Stethoscope,
     gradient: "from-rose-500/30 via-pink-400/10 to-transparent",
   },
   {
@@ -70,6 +75,7 @@ const projects: Project[] = [
     ],
     stack: ["HTML5", "CSS3", "JavaScript", "JSON"],
     demo: "https://house-visualization.netlify.app/",
+    status: "live",
     icon: Home,
     gradient: "from-sky-500/30 via-indigo-400/10 to-transparent",
   },
@@ -81,13 +87,130 @@ const projects: Project[] = [
     ],
     stack: ["HTML5", "CSS3", "JavaScript"],
     demo: "https://hungryhubresto.ccbp.tech",
-    icon: UtensilsCrossed,
+    status: "live",
+    icon: Utensils,
     gradient: "from-fuchsia-500/30 via-purple-400/10 to-transparent",
   },
 ];
 
+const stats = [
+  { value: "5+", label: "Projects Built" },
+  { value: "3+", label: "Domains Explored" },
+  { value: "10+", label: "Technologies Used" },
+];
+
+function ProjectCard({ p, onStatus }: { p: Project; onStatus: () => void }) {
+  const Icon = p.icon;
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      whileHover={{ y: -6, scale: 1.015 }}
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl hairline bg-surface transition-all duration-300 hover:border-primary/50 hover:shadow-[0_20px_60px_-20px_hsl(var(--primary)/0.45)]"
+    >
+      {/* Banner */}
+      <div className={`relative h-36 sm:h-40 overflow-hidden bg-gradient-to-br ${p.gradient}`}>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,hsl(var(--primary)/0.18),transparent_60%)]" />
+        <div className="absolute inset-0 grid place-items-center">
+          <Icon className="h-14 w-14 text-foreground/85 transition-transform duration-500 group-hover:scale-110" />
+        </div>
+        <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
+          {p.featured && (
+            <span className="inline-flex items-center gap-1 rounded-full bg-cyan-500/15 backdrop-blur hairline border-cyan-400/40 px-2 py-0.5 text-[10px] font-medium text-cyan-300">
+              <Star className="h-3 w-3" /> Featured
+            </span>
+          )}
+          {p.status === "live" && (
+            <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/15 backdrop-blur hairline border-emerald-400/40 px-2 py-0.5 text-[10px] font-medium text-emerald-300">
+              <CircleDot className="h-3 w-3" /> Live
+            </span>
+          )}
+          {p.status === "under-development" && (
+            <span className="inline-flex items-center gap-1 rounded-full bg-orange-500/15 backdrop-blur hairline border-orange-400/40 px-2 py-0.5 text-[10px] font-medium text-orange-300">
+              <Wrench className="h-3 w-3" /> In Development
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* Body */}
+      <div className="flex flex-1 flex-col p-6">
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="text-lg font-semibold tracking-tight text-foreground">
+            {p.title}
+          </h3>
+        </div>
+        {p.repoAvailable && (
+          <span className="mt-2 inline-flex w-fit items-center gap-1 rounded-md bg-primary/10 hairline border-primary/30 px-2 py-0.5 text-[10px] font-medium text-primary">
+            <FolderGit2 className="h-3 w-3" /> Repository Available
+          </span>
+        )}
+        <ul className="mt-3 space-y-1.5 text-sm text-muted-foreground leading-relaxed">
+          {p.bullets.map((b) => (
+            <li key={b} className="flex gap-2">
+              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary/60" />
+              <span>{b}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-5 flex flex-wrap gap-1.5">
+          {p.stack.map((s) => (
+            <span
+              key={s}
+              className="rounded-md bg-background/40 hairline px-2 py-0.5 text-xs font-mono text-muted-foreground"
+            >
+              {s}
+            </span>
+          ))}
+        </div>
+
+        {/* Spacer pushes actions to the bottom */}
+        <div className="mt-auto pt-6">
+          <div className="flex items-center gap-3 text-sm pt-4 border-t border-border/60">
+            {p.github && (
+              <a
+                href={p.github}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-md hairline px-3 py-1.5 text-muted-foreground hover:text-foreground hover:bg-surface-elevated transition"
+              >
+                <Github className="h-4 w-4" /> GitHub
+              </a>
+            )}
+            {p.demo && (
+              <a
+                href={p.demo}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-md bg-primary/10 text-primary hairline border-primary/30 px-3 py-1.5 hover:bg-primary/20 transition"
+              >
+                <ExternalLink className="h-4 w-4" /> Live Demo
+              </a>
+            )}
+            {p.status === "under-development" && (
+              <button
+                type="button"
+                onClick={onStatus}
+                className="inline-flex items-center gap-1.5 rounded-md hairline px-3 py-1.5 text-orange-300 hover:bg-surface-elevated transition"
+              >
+                <Wrench className="h-4 w-4" /> Project Status
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
 export function Projects() {
   const [statusOpen, setStatusOpen] = useState(false);
+
+  const firstRow = projects.slice(0, 3);
+  const secondRow = projects.slice(3);
 
   return (
     <Section
@@ -96,99 +219,41 @@ export function Projects() {
       title="Projects."
       description="A few things I've built while learning to ship real software."
     >
-      <div className="grid sm:grid-cols-2 gap-5 md:gap-6">
-        {projects.map((p) => {
-          const Icon = p.icon;
-          return (
-            <motion.article
-              key={p.title}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-              whileHover={{ y: -4 }}
-              className="group relative flex flex-col overflow-hidden rounded-2xl hairline bg-surface transition-all duration-300 hover:border-primary/40 hover:shadow-[0_10px_40px_-12px_hsl(var(--primary)/0.35)]"
-            >
-              {/* Banner */}
-              <div className={`relative h-36 sm:h-40 overflow-hidden bg-gradient-to-br ${p.gradient}`}>
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,hsl(var(--primary)/0.18),transparent_60%)]" />
-                <div className="absolute inset-0 grid place-items-center">
-                  <Icon className="h-14 w-14 text-foreground/80 transition-transform duration-500 group-hover:scale-110" />
-                </div>
-                <div className="absolute top-3 left-3 flex gap-2">
-                  {p.featured && (
-                    <span className="inline-flex items-center gap-1 rounded-full bg-background/70 backdrop-blur hairline px-2 py-0.5 text-[10px] font-medium text-foreground">
-                      <Star className="h-3 w-3 text-primary" /> Featured
-                    </span>
-                  )}
-                  {p.status === "under-development" && (
-                    <span className="inline-flex items-center gap-1 rounded-full bg-background/70 backdrop-blur hairline px-2 py-0.5 text-[10px] font-medium text-amber-400">
-                      <Wrench className="h-3 w-3" /> In Development
-                    </span>
-                  )}
-                </div>
-              </div>
+      {/* Stats */}
+      <div className="mb-10 grid grid-cols-3 gap-3 sm:gap-6 rounded-2xl hairline bg-surface/60 p-5 sm:p-6">
+        {stats.map((s) => (
+          <div key={s.label} className="text-center">
+            <div className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
+              {s.value}
+            </div>
+            <div className="mt-1 text-[11px] sm:text-xs uppercase tracking-[0.15em] text-muted-foreground">
+              {s.label}
+            </div>
+          </div>
+        ))}
+      </div>
 
-              {/* Body */}
-              <div className="flex flex-1 flex-col p-6">
-                <h3 className="text-lg font-semibold tracking-tight text-foreground">
-                  {p.title}
-                </h3>
-                <ul className="mt-3 space-y-1.5 text-sm text-muted-foreground leading-relaxed">
-                  {p.bullets.map((b) => (
-                    <li key={b} className="flex gap-2">
-                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary/60" />
-                      <span>{b}</span>
-                    </li>
-                  ))}
-                </ul>
+      {/* First row: 3 cards on desktop */}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        {firstRow.map((p) => (
+          <ProjectCard key={p.title} p={p} onStatus={() => setStatusOpen(true)} />
+        ))}
+      </div>
 
-                <div className="mt-5 flex flex-wrap gap-1.5">
-                  {p.stack.map((s) => (
-                    <span
-                      key={s}
-                      className="rounded-md bg-background/40 hairline px-2 py-0.5 text-xs font-mono text-muted-foreground"
-                    >
-                      {s}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="mt-6 flex items-center gap-3 text-sm pt-4 border-t border-border/60">
-                  {p.github && (
-                    <a
-                      href={p.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-md hairline px-3 py-1.5 text-muted-foreground hover:text-foreground hover:bg-surface-elevated transition"
-                    >
-                      <Github className="h-4 w-4" /> GitHub
-                    </a>
-                  )}
-                  {p.demo && (
-                    <a
-                      href={p.demo}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-md bg-primary/10 text-primary hairline border-primary/30 px-3 py-1.5 hover:bg-primary/20 transition"
-                    >
-                      <ExternalLink className="h-4 w-4" /> Live Demo
-                    </a>
-                  )}
-                  {p.status === "under-development" && (
-                    <button
-                      type="button"
-                      onClick={() => setStatusOpen(true)}
-                      className="inline-flex items-center gap-1.5 rounded-md hairline px-3 py-1.5 text-amber-400 hover:bg-surface-elevated transition"
-                    >
-                      <Wrench className="h-4 w-4" /> Project Status
-                    </button>
-                  )}
-                </div>
-              </div>
-            </motion.article>
-          );
-        })}
+      {/* Second row: 2 cards centered on desktop (same width as first-row cards) */}
+      <div className="mt-5 md:mt-6 grid sm:grid-cols-2 lg:grid-cols-6 gap-5 md:gap-6">
+        {secondRow.map((p, i) => (
+          <div
+            key={p.title}
+            className={
+              i === 0
+                ? "lg:col-span-2 lg:col-start-2"
+                : "lg:col-span-2"
+            }
+          >
+            <ProjectCard p={p} onStatus={() => setStatusOpen(true)} />
+          </div>
+        ))}
       </div>
 
       <AnimatePresence>
@@ -216,7 +281,7 @@ export function Projects() {
                 <X className="h-4 w-4" />
               </button>
               <div className="flex items-start gap-3">
-                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-amber-500/15 text-amber-400">
+                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-orange-500/15 text-orange-300">
                   <Wrench className="h-5 w-5" />
                 </div>
                 <div>
