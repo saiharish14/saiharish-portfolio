@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 
 const links = [
-  { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
-  { href: "#projects", label: "Projects" },
-  { href: "#education", label: "Education" },
-  { href: "#contact", label: "Contact" },
+  { href: "#about", id: "about", label: "About" },
+  { href: "#skills", id: "skills", label: "Skills" },
+  { href: "#projects", id: "projects", label: "Projects" },
+  { href: "#education", id: "education", label: "Education" },
+  { href: "#contact", id: "contact", label: "Contact" },
 ];
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState<string>("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -19,12 +20,31 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const sections = links
+      .map((l) => document.getElementById(l.id))
+      .filter((el): el is HTMLElement => !!el);
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]) setActive(visible[0].target.id);
+      },
+      { rootMargin: "-40% 0px -50% 0px", threshold: [0, 0.25, 0.5, 1] }
+    );
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 border-b ${
         scrolled
-          ? "backdrop-blur-md bg-background/75 border-b border-border"
-          : "bg-transparent"
+          ? "backdrop-blur-md bg-background/80 border-border"
+          : "bg-background/40 backdrop-blur-sm border-border/40"
       }`}
     >
       <nav className="container-page flex h-16 items-center justify-between">
@@ -36,16 +56,24 @@ export function Nav() {
         </a>
 
         <ul className="hidden md:flex items-center gap-8 text-sm">
-          {links.map((l) => (
-            <li key={l.href}>
-              <a
-                href={l.href}
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {l.label}
-              </a>
-            </li>
-          ))}
+          {links.map((l) => {
+            const isActive = active === l.id;
+            return (
+              <li key={l.href}>
+                <a
+                  href={l.href}
+                  className={`relative transition-colors ${
+                    isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {l.label}
+                  {isActive && (
+                    <span className="absolute -bottom-1.5 left-0 right-0 h-px bg-primary" />
+                  )}
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         <a
@@ -76,7 +104,9 @@ export function Nav() {
                 <a
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="block py-1 text-muted-foreground hover:text-foreground"
+                  className={`block py-1 ${
+                    active === l.id ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                  }`}
                 >
                   {l.label}
                 </a>
