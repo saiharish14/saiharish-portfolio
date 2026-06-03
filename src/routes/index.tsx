@@ -9,6 +9,7 @@ import { Certifications } from "@/components/portfolio/Certifications";
 import { CodingProfiles } from "@/components/portfolio/CodingProfiles";
 import { Contact } from "@/components/portfolio/Contact";
 import { Footer } from "@/components/portfolio/Footer";
+import { BackToTop } from "@/components/portfolio/BackToTop";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -45,6 +46,7 @@ function Index() {
         <Contact />
       </main>
       <Footer />
+      <BackToTop />
     </div>
   );
 }
