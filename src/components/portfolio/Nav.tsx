@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+
 
 const links = [
   { href: "#about", id: "about", label: "About" },
