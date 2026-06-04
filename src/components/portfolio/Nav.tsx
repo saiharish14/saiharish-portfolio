@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+
 
 const links = [
   { href: "#about", id: "about", label: "About" },
@@ -96,25 +98,40 @@ export function Nav() {
         </button>
       </nav>
 
-      {open && (
-        <div className="md:hidden border-t border-border bg-background/95 backdrop-blur">
-          <ul className="container-page py-4 space-y-3 text-sm">
-            {links.map((l) => (
-              <li key={l.href}>
-                <a
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className={`block py-1 ${
-                    active === l.id ? "text-foreground" : "text-muted-foreground hover:text-foreground"
-                  }`}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="mobile-menu"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="md:hidden overflow-hidden border-t border-border bg-background/80 backdrop-blur-xl"
+          >
+            <ul className="container-page py-4 space-y-3 text-sm">
+              {links.map((l, i) => (
+                <motion.li
+                  key={l.href}
+                  initial={{ opacity: 0, y: -6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.25, delay: 0.04 * i, ease: "easeOut" }}
                 >
-                  {l.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+                  <a
+                    href={l.href}
+                    onClick={() => setOpen(false)}
+                    className={`block py-1 ${
+                      active === l.id ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {l.label}
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </header>
   );
 }
