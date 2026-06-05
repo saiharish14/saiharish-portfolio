@@ -1,11 +1,12 @@
 import { Section } from "./Section";
 
 const groups: { title: string; items: string[] }[] = [
-  { title: "Languages", items: ["Python", "JavaScript", "HTML", "CSS"] },
-  { title: "Frontend", items: ["React.js", "Tailwind CSS", "Bootstrap"] },
-  { title: "Backend", items: ["Flask", "REST APIs"] },
+  { title: "Languages", items: ["Python", "JavaScript", "HTML5", "CSS3"] },
+  { title: "Frontend", items: ["React.js", "Bootstrap", "Responsive Design"] },
+  { title: "Backend Fundamentals", items: ["Flask (Basics)", "REST APIs (Basics)"] },
   { title: "Database", items: ["MySQL", "SQLite"] },
   { title: "Tools", items: ["Git", "GitHub", "VS Code", "Postman"] },
+  { title: "AI & Productivity", items: ["Prompt Engineering", "AI Tools & Automation"] },
 ];
 
 export function Skills() {
