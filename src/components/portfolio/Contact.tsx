@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Section } from "./Section";
-import { Mail, Phone, MapPin, Send, Loader2, Check, X } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Loader2, Check } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import { z } from "zod";
+import { toast } from "sonner";
+
 
 const EMAILJS_SERVICE_ID = "service_f2jhae8";
 const EMAILJS_TEMPLATE_ID = "template_l3i6ocf";
@@ -19,13 +21,7 @@ export function Contact() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
-  const [popup, setPopup] = useState<null | "success" | "error">(null);
 
-  useEffect(() => {
-    if (!popup) return;
-    const t = setTimeout(() => setPopup(null), 4000);
-    return () => clearTimeout(t);
-  }, [popup]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -57,14 +53,18 @@ export function Contact() {
         },
         { publicKey: EMAILJS_PUBLIC_KEY },
       );
-      setPopup("success");
+      toast.success("Message sent successfully! I'll get back to you soon.", {
+        icon: <Check className="h-4 w-4 text-emerald-500" />,
+        duration: 3000,
+      });
       setForm({ name: "", email: "", subject: "", message: "" });
     } catch (err) {
       console.error(err);
-      setPopup("error");
+      toast.error("Message failed to send. Please try again later.", { duration: 3000 });
     } finally {
       setLoading(false);
     }
+
   };
 
   return (
@@ -88,8 +88,9 @@ export function Contact() {
       <div className="rounded-2xl hairline bg-surface/60 backdrop-blur-sm p-6 md:p-8">
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary">
           <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-          Open to Internships, Freelance Projects, and Entry-Level Opportunities
+          Available for Internships | Entry-Level Software Engineering Roles | Frontend Development Opportunities
         </div>
+
 
         <form onSubmit={onSubmit} className="grid gap-4" noValidate>
           <div className="grid md:grid-cols-2 gap-4">
@@ -152,71 +153,17 @@ export function Contact() {
                 </>
               )}
             </button>
-            <span className="text-xs text-muted-foreground">Typically responds within 24 hours</span>
+            <div className="flex flex-col gap-0.5">
+              <span className="text-xs text-muted-foreground">Typically responds within 24 hours</span>
+              <span className="text-[11px] text-muted-foreground/70">All inquiries are reviewed personally. Looking forward to discussing opportunities, collaborations, and innovative projects.</span>
+            </div>
           </div>
         </form>
       </div>
-
-      {popup && <StatusPopup kind={popup} onClose={() => setPopup(null)} />}
     </Section>
   );
 }
 
-function StatusPopup({ kind, onClose }: { kind: "success" | "error"; onClose: () => void }) {
-  const isSuccess = kind === "success";
-  return (
-    <div
-      className="fixed inset-0 z-[100] grid place-items-center bg-background/70 backdrop-blur-sm animate-fade-in"
-      onClick={onClose}
-      role="dialog"
-      aria-modal="true"
-    >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        className="relative w-[92%] max-w-sm rounded-2xl border border-border/60 bg-surface/95 p-7 text-center shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] animate-scale-in"
-      >
-        <button
-          onClick={onClose}
-          className="absolute right-3 top-3 rounded-md p-1 text-muted-foreground hover:text-foreground transition"
-          aria-label="Close"
-        >
-          <X className="h-4 w-4" />
-        </button>
-
-        <div className="mx-auto mb-4 grid h-16 w-16 place-items-center">
-          {isSuccess ? (
-            <div className="relative grid h-16 w-16 place-items-center rounded-full bg-emerald-500/15 ring-2 ring-emerald-500/40">
-              <span className="absolute inset-0 rounded-full bg-emerald-500/20 animate-ping" />
-              <Check className="h-8 w-8 text-emerald-400 animate-scale-in" strokeWidth={3} />
-            </div>
-          ) : (
-            <div className="relative grid h-16 w-16 place-items-center rounded-full bg-destructive/15 ring-2 ring-destructive/40">
-              <X className="h-8 w-8 text-destructive animate-scale-in" strokeWidth={3} />
-            </div>
-          )}
-        </div>
-
-        <h3 className="text-lg font-semibold text-foreground">
-          {isSuccess ? "✅ Message Sent Successfully!" : "❌ Message Failed"}
-        </h3>
-        <p className="mt-2 text-sm text-muted-foreground">
-          {isSuccess
-            ? "Thank you for reaching out. I'll get back to you soon."
-            : "Please try again later."}
-        </p>
-
-        <div className="mt-5 h-1 w-full overflow-hidden rounded-full bg-border/40">
-          <div
-            className={`h-full ${isSuccess ? "bg-emerald-500" : "bg-destructive"}`}
-            style={{ animation: "shrink 4s linear forwards" }}
-          />
-        </div>
-      </div>
-
-      <style>{`@keyframes shrink { from { width: 100%; } to { width: 0%; } }`}</style>
-    </div>
-  );
-}
 
 function Field({
   label,
