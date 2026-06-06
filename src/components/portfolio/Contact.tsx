@@ -57,11 +57,11 @@ export function Contact() {
         },
         { publicKey: EMAILJS_PUBLIC_KEY },
       );
-      toast.success("Message sent successfully. I'll get back to you soon.");
+      setPopup("success");
       setForm({ name: "", email: "", subject: "", message: "" });
     } catch (err) {
       console.error(err);
-      toast.error("Failed to send message. Please try again or email me directly.");
+      setPopup("error");
     } finally {
       setLoading(false);
     }
