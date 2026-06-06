@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Section } from "./Section";
-import { Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Loader2, Check, X } from "lucide-react";
 import emailjs from "@emailjs/browser";
-import { toast } from "sonner";
 import { z } from "zod";
 
 const EMAILJS_SERVICE_ID = "service_f2jhae8";
