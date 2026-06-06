@@ -156,7 +156,65 @@ export function Contact() {
           </div>
         </form>
       </div>
+
+      {popup && <StatusPopup kind={popup} onClose={() => setPopup(null)} />}
     </Section>
+  );
+}
+
+function StatusPopup({ kind, onClose }: { kind: "success" | "error"; onClose: () => void }) {
+  const isSuccess = kind === "success";
+  return (
+    <div
+      className="fixed inset-0 z-[100] grid place-items-center bg-background/70 backdrop-blur-sm animate-fade-in"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-[92%] max-w-sm rounded-2xl border border-border/60 bg-surface/95 p-7 text-center shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] animate-scale-in"
+      >
+        <button
+          onClick={onClose}
+          className="absolute right-3 top-3 rounded-md p-1 text-muted-foreground hover:text-foreground transition"
+          aria-label="Close"
+        >
+          <X className="h-4 w-4" />
+        </button>
+
+        <div className="mx-auto mb-4 grid h-16 w-16 place-items-center">
+          {isSuccess ? (
+            <div className="relative grid h-16 w-16 place-items-center rounded-full bg-emerald-500/15 ring-2 ring-emerald-500/40">
+              <span className="absolute inset-0 rounded-full bg-emerald-500/20 animate-ping" />
+              <Check className="h-8 w-8 text-emerald-400 animate-scale-in" strokeWidth={3} />
+            </div>
+          ) : (
+            <div className="relative grid h-16 w-16 place-items-center rounded-full bg-destructive/15 ring-2 ring-destructive/40">
+              <X className="h-8 w-8 text-destructive animate-scale-in" strokeWidth={3} />
+            </div>
+          )}
+        </div>
+
+        <h3 className="text-lg font-semibold text-foreground">
+          {isSuccess ? "✅ Message Sent Successfully!" : "❌ Message Failed"}
+        </h3>
+        <p className="mt-2 text-sm text-muted-foreground">
+          {isSuccess
+            ? "Thank you for reaching out. I'll get back to you soon."
+            : "Please try again later."}
+        </p>
+
+        <div className="mt-5 h-1 w-full overflow-hidden rounded-full bg-border/40">
+          <div
+            className={`h-full ${isSuccess ? "bg-emerald-500" : "bg-destructive"}`}
+            style={{ animation: "shrink 4s linear forwards" }}
+          />
+        </div>
+      </div>
+
+      <style>{`@keyframes shrink { from { width: 100%; } to { width: 0%; } }`}</style>
+    </div>
   );
 }
 
