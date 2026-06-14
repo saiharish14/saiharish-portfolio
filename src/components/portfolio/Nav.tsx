@@ -79,24 +79,31 @@ export function Nav() {
           })}
         </ul>
 
-        <a
-          href="#contact"
-          className="hidden md:inline-flex items-center rounded-md bg-primary px-3.5 py-1.5 text-sm font-medium text-primary-foreground hover:opacity-90 transition"
-        >
-          Get in touch
-        </a>
+        <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle />
+          <a
+            href="#contact"
+            className="inline-flex items-center rounded-md bg-primary px-3.5 py-1.5 text-sm font-medium text-primary-foreground hover:opacity-90 transition"
+          >
+            Get in touch
+          </a>
+        </div>
 
-        <button
-          aria-label="Menu"
-          onClick={() => setOpen((v) => !v)}
-          className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-md hairline"
-        >
-          <span className="sr-only">Toggle menu</span>
-          <div className="space-y-1.5">
-            <span className="block h-px w-5 bg-foreground" />
-            <span className="block h-px w-5 bg-foreground" />
-          </div>
-        </button>
+        <div className="md:hidden flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            aria-label="Menu"
+            onClick={() => setOpen((v) => !v)}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md hairline"
+          >
+            <span className="sr-only">Toggle menu</span>
+            <div className="space-y-1.5">
+              <span className="block h-px w-5 bg-foreground" />
+              <span className="block h-px w-5 bg-foreground" />
+            </div>
+          </button>
+        </div>
+
       </nav>
 
       <AnimatePresence>
