@@ -19,7 +19,7 @@ const items: EduItem[] = [
     title: "Bachelor of Technology — Computer Science & Engineering",
     institution: "Vignan's Foundation for Science, Technology & Research",
     duration: "2023 — 2027",
-    score: "6.85 / 10",
+    score: "7.32 / 10",
     scoreLabel: "CGPA",
     description:
       "Currently pursuing a Bachelor's degree in Computer Science and Engineering with a focus on software development, web technologies, data structures, algorithms, and real-world project development.",
