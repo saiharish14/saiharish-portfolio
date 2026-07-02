@@ -44,6 +44,14 @@ export function Hero() {
               </a>
               <a
                 href={resumeAsset.url}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-md hairline bg-surface px-5 py-2.5 text-sm font-medium text-foreground hover:bg-surface-elevated transition"
+              >
+                <Eye className="h-4 w-4" /> View Resume
+              </a>
+              <a
+                href={resumeAsset.url}
                 download="Sai_Harish_Resume.pdf"
                 target="_blank"
                 rel="noreferrer"
