@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Code2, ArrowRight, Eye, Download, Mail } from "lucide-react";
+import { Github, Linkedin, Code2, ArrowRight, Download, Mail } from "lucide-react";
 import profileAsset from "@/assets/profile-pro.jpeg.asset.json";
 import resumeAsset from "@/assets/resume.pdf.asset.json";
 import { RoleRotator } from "./RoleRotator";
@@ -42,16 +42,6 @@ export function Hero() {
               >
                 View Projects <ArrowRight className="h-4 w-4" />
               </a>
-              <button
-                type="button"
-                onClick={() => {
-                  const url = new URL(resumeAsset.url, window.location.origin).href;
-                  window.open(url, "_blank", "noopener,noreferrer");
-                }}
-                className="inline-flex items-center justify-center gap-2 rounded-md hairline bg-surface px-5 py-2.5 text-sm font-medium text-foreground hover:bg-surface-elevated transition"
-              >
-                <Eye className="h-4 w-4" /> View Resume
-              </button>
               <a
                 href={resumeAsset.url}
                 download="Sai_Harish_Resume.pdf"
