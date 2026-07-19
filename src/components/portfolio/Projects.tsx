@@ -13,6 +13,7 @@ import {
   X,
   CircleDot,
   FolderGit2,
+  Brain,
 } from "lucide-react";
 import { Section } from "./Section";
 
@@ -25,40 +26,28 @@ type Project = {
   featured?: boolean;
   status?: "under-development" | "live";
   repoAvailable?: boolean;
+  ai?: boolean;
   icon: React.ComponentType<{ className?: string }>;
   gradient: string;
 };
 
 const projects: Project[] = [
   {
-    title: "Crop Disease Prediction System",
+    title: "RapidAid AI",
     bullets: [
-      "Built a machine learning-powered web application for crop disease prediction using environmental and agricultural data.",
-      "Developed responsive frontend interfaces and integrated prediction workflows with Flask backend services.",
+      "Developed an AI-powered emergency triage and first-aid assistant that analyzes user symptoms and provides intelligent healthcare guidance using Google Gemini AI.",
+      "Implemented secure user authentication using JWT, automatic report history, PDF report generation, and a responsive cross-device user experience.",
+      "Built a full-stack healthcare solution using React, Flask, SQLite, REST APIs, and Google Gemini AI with successful deployment on Vercel and Render.",
     ],
-    stack: ["Python", "Machine Learning", "Flask", "HTML5", "CSS3", "JavaScript"],
-    github: "https://github.com/saiharish14/crop-disease-prediction",
-    demo: "https://crop-disease-prediction-1-gd9f.onrender.com",
+    stack: ["React", "Flask", "Python", "SQLite", "Google Gemini AI", "JWT", "REST APIs"],
+    github: "https://github.com/saiharish14/RapidAid-AI",
+    demo: "https://rapid-aid-ai.vercel.app/",
     featured: true,
+    ai: true,
     status: "live",
     repoAvailable: true,
-    icon: Leaf,
-    gradient: "from-emerald-500/30 via-emerald-400/10 to-transparent",
-  },
-  {
-    title: "Smart Fuel Management System",
-    bullets: [
-      "Developed an interactive fuel prediction and mileage analysis dashboard using JavaScript and Chart.js.",
-      "Created responsive data visualization dashboards with client-side data processing and reporting features.",
-    ],
-    stack: ["HTML5", "CSS3", "JavaScript", "Chart.js"],
-    github: "https://github.com/saiharish14/smart-fuel-system",
-    demo: "https://smart-fuel.netlify.app/",
-    featured: true,
-    status: "live",
-    repoAvailable: true,
-    icon: Fuel,
-    gradient: "from-amber-500/30 via-orange-400/10 to-transparent",
+    icon: Brain,
+    gradient: "from-violet-500/30 via-cyan-400/10 to-transparent",
   },
   {
     title: "Health Diagnosis System",
@@ -74,6 +63,34 @@ const projects: Project[] = [
     repoAvailable: true,
     icon: Stethoscope,
     gradient: "from-rose-500/30 via-pink-400/10 to-transparent",
+  },
+  {
+    title: "Crop Disease Prediction System",
+    bullets: [
+      "Built a machine learning-powered web application for crop disease prediction using environmental and agricultural data.",
+      "Developed responsive frontend interfaces and integrated prediction workflows with Flask backend services.",
+    ],
+    stack: ["Python", "Machine Learning", "Flask", "HTML5", "CSS3", "JavaScript"],
+    github: "https://github.com/saiharish14/crop-disease-prediction",
+    demo: "https://crop-disease-prediction-1-gd9f.onrender.com",
+    status: "live",
+    repoAvailable: true,
+    icon: Leaf,
+    gradient: "from-emerald-500/30 via-emerald-400/10 to-transparent",
+  },
+  {
+    title: "Smart Fuel Management System",
+    bullets: [
+      "Developed an interactive fuel prediction and mileage analysis dashboard using JavaScript and Chart.js.",
+      "Created responsive data visualization dashboards with client-side data processing and reporting features.",
+    ],
+    stack: ["HTML5", "CSS3", "JavaScript", "Chart.js"],
+    github: "https://github.com/saiharish14/smart-fuel-system",
+    demo: "https://smart-fuel.netlify.app/",
+    status: "live",
+    repoAvailable: true,
+    icon: Fuel,
+    gradient: "from-amber-500/30 via-orange-400/10 to-transparent",
   },
   {
     title: "3D House Visualization System",
@@ -106,7 +123,7 @@ const projects: Project[] = [
 ];
 
 const stats = [
-  { value: "5+", label: "Projects Built" },
+  { value: "6+", label: "Projects Built" },
   { value: "3+", label: "Domains Explored" },
   { value: "10+", label: "Technologies Used" },
 ];
@@ -120,7 +137,11 @@ function ProjectCard({ p, onStatus }: { p: Project; onStatus: () => void }) {
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.4, ease: "easeOut" }}
       whileHover={{ y: -6, scale: 1.015 }}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl hairline bg-surface transition-all duration-300 hover:border-primary/50 hover:shadow-[0_20px_60px_-20px_hsl(var(--primary)/0.45)]"
+      className={`group relative flex h-full flex-col overflow-hidden rounded-2xl hairline bg-surface transition-all duration-300 hover:border-primary/50 ${
+        p.featured
+          ? "shadow-[0_0_0_1px_hsl(var(--primary)/0.35),0_0_50px_-15px_hsl(var(--primary)/0.25)] hover:shadow-[0_0_0_1px_hsl(var(--primary)/0.55),0_20px_60px_-20px_hsl(var(--primary)/0.45)]"
+          : "hover:shadow-[0_20px_60px_-20px_hsl(var(--primary)/0.45)]"
+      }`}
     >
       {/* Banner */}
       <div className={`relative h-36 sm:h-40 overflow-hidden bg-gradient-to-br ${p.gradient}`}>
@@ -132,6 +153,11 @@ function ProjectCard({ p, onStatus }: { p: Project; onStatus: () => void }) {
           {p.featured && (
             <span className="inline-flex items-center gap-1 rounded-full bg-cyan-500/15 backdrop-blur hairline border-cyan-400/40 px-2 py-0.5 text-[10px] font-medium text-cyan-300">
               <Star className="h-3 w-3" /> Featured
+            </span>
+          )}
+          {p.ai && (
+            <span className="inline-flex items-center gap-1 rounded-full bg-violet-500/15 backdrop-blur hairline border-violet-400/40 px-2 py-0.5 text-[10px] font-medium text-violet-300">
+              <Brain className="h-3 w-3" /> AI Powered
             </span>
           )}
           {p.status === "live" && (
@@ -252,19 +278,10 @@ export function Projects() {
         ))}
       </div>
 
-      {/* Second row: 2 cards centered on desktop (same width as first-row cards) */}
-      <div className="mt-5 md:mt-6 grid sm:grid-cols-2 lg:grid-cols-6 gap-5 md:gap-6">
-        {secondRow.map((p, i) => (
-          <div
-            key={p.title}
-            className={
-              i === 0
-                ? "lg:col-span-2 lg:col-start-2"
-                : "lg:col-span-2"
-            }
-          >
-            <ProjectCard p={p} onStatus={() => setStatusOpen(true)} />
-          </div>
+      {/* Second row: 3 cards on desktop */}
+      <div className="mt-5 md:mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        {secondRow.map((p) => (
+          <ProjectCard key={p.title} p={p} onStatus={() => setStatusOpen(true)} />
         ))}
       </div>
 
