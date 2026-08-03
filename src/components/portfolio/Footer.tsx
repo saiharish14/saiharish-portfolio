@@ -23,7 +23,7 @@ export function Footer() {
             aria-label="GitHub"
             href="https://github.com/saiharish14"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="hover:text-foreground transition-colors duration-200"
           >
             <Github className="h-[18px] w-[18px]" />
@@ -32,7 +32,7 @@ export function Footer() {
             aria-label="LinkedIn"
             href="https://www.linkedin.com/in/sai-harish-tiruvidhula-076541427/"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="hover:text-foreground transition-colors duration-200"
           >
             <Linkedin className="h-[18px] w-[18px]" />
@@ -41,7 +41,7 @@ export function Footer() {
             aria-label="LeetCode"
             href="https://leetcode.com/u/saiharish14/"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="hover:text-foreground transition-colors duration-200"
           >
             <Code2 className="h-[18px] w-[18px]" />
