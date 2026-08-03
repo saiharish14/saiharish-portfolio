@@ -22,7 +22,7 @@ const profiles = [
     subtitle: "Professional Network",
     description: "Connect with me professionally and follow my career journey.",
     button: "Connect on LinkedIn",
-    href: "https://www.linkedin.com/in/saiharish-tiruvidhula/",
+    href: "https://www.linkedin.com/in/sai-harish-tiruvidhula-076541427/",
     Icon: Linkedin,
   },
   {

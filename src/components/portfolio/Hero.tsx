@@ -62,7 +62,7 @@ export function Hero() {
               <a aria-label="GitHub" href="https://github.com/saiharish14" target="_blank" rel="noreferrer" className="hover:text-foreground transition">
                 <Github className="h-5 w-5" />
               </a>
-              <a aria-label="LinkedIn" href="https://www.linkedin.com/in/saiharish-tiruvidhula/" target="_blank" rel="noreferrer" className="hover:text-foreground transition">
+              <a aria-label="LinkedIn" href="https://www.linkedin.com/in/sai-harish-tiruvidhula-076541427/" target="_blank" rel="noreferrer" className="hover:text-foreground transition">
                 <Linkedin className="h-5 w-5" />
               </a>
               <a aria-label="LeetCode" href="https://leetcode.com/u/saiharish14/" target="_blank" rel="noreferrer" className="hover:text-foreground transition">
