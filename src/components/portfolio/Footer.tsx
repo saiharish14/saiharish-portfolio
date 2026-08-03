@@ -30,7 +30,7 @@ export function Footer() {
           </a>
           <a
             aria-label="LinkedIn"
-            href="https://www.linkedin.com/in/saiharish-tiruvidhula/"
+            href="https://www.linkedin.com/in/sai-harish-tiruvidhula-076541427/"
             target="_blank"
             rel="noreferrer"
             className="hover:text-foreground transition-colors duration-200"
