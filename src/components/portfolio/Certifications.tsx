@@ -33,11 +33,23 @@ type Cert = {
   year: string;
   image: string;
   tags: string[];
-  category: "featured" | "leadership" | "additional";
+  category: "internship" | "featured" | "leadership" | "additional";
   mostValuable?: boolean;
 };
 
 const certs: Cert[] = [
+  {
+    id: "decodelabs-internship",
+    title: "Full Stack Development Virtual Internship",
+    issuer: "DecodeLabs",
+    description:
+      "Successfully completed a one-month Virtual Internship in Full Stack Development at DecodeLabs, gaining practical experience in modern web development, collaborative project workflows, and real-world software engineering practices. Duration: June 12, 2026 – July 12, 2026 · Issued: July 13, 2026.",
+    year: "2026",
+    image: decodelabs.url,
+    tags: ["Internship", "Full Stack Development", "Web Development"],
+    category: "internship",
+    mostValuable: true,
+  },
   {
     id: "ai-sashakt",
     title: "AI Sashakt Badge",
