@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Code2, ArrowRight, Download, Mail, FileText } from "lucide-react";
+import { Github, Linkedin, Code2, ArrowRight, Download, Mail } from "lucide-react";
 import profileAsset from "@/assets/profile-pro.jpeg.asset.json";
 import resumeAsset from "@/assets/resume.pdf.asset.json";
 import { RoleRotator } from "./RoleRotator";
