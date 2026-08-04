@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Code2, ArrowRight, Download, Mail, FileText } from "lucide-react";
+import { Github, Linkedin, Code2, ArrowRight, Download, Mail } from "lucide-react";
 import profileAsset from "@/assets/profile-pro.jpeg.asset.json";
 import resumeAsset from "@/assets/resume.pdf.asset.json";
 import { RoleRotator } from "./RoleRotator";
@@ -41,14 +41,6 @@ export function Hero() {
                 className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:opacity-90 transition"
               >
                 View Projects <ArrowRight className="h-4 w-4" />
-              </a>
-              <a
-                href={resumeAsset.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-md hairline bg-surface px-5 py-2.5 text-sm font-medium text-foreground hover:bg-surface-elevated transition"
-              >
-                <FileText className="h-4 w-4" /> View Resume
               </a>
               <a
                 href={resumeAsset.url}
