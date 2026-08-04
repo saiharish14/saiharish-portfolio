@@ -226,6 +226,18 @@ export function Certifications() {
         ))}
       </div>
 
+      {/* Internship */}
+      <CategoryHeader
+        icon={Briefcase}
+        title="Internship Experience"
+        subtitle="Industry training & applied development"
+      />
+      <div className="grid sm:grid-cols-2 gap-5 mb-12">
+        {internships.map((c) => (
+          <CertCard key={c.id} cert={c} onView={open} prominent />
+        ))}
+      </div>
+
       {/* Featured */}
       <CategoryHeader
         icon={Trophy}
