@@ -60,7 +60,6 @@ const certs: Cert[] = [
     image: intelBadge.url,
     tags: ["Featured", "AI", "Certification"],
     category: "featured",
-    mostValuable: true,
   },
   {
     id: "intel-nlp",
