@@ -23,6 +23,7 @@ import mahotsav from "@/assets/certs/mahotsav.jpg.asset.json";
 import vbyld from "@/assets/certs/vbyld.jpg.asset.json";
 import promptEng from "@/assets/certs/prompt-engineering.png.asset.json";
 import be10x from "@/assets/certs/be10x.jpg.asset.json";
+import decodelabs from "@/assets/certs/decodelabs-internship.jpg.asset.json";
 
 type Cert = {
   id: string;
