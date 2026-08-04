@@ -427,7 +427,8 @@ function CertCard({
 
       {cert.mostValuable && (
         <div className="absolute top-3 right-3 z-10 inline-flex items-center gap-1 rounded-full bg-primary text-primary-foreground px-2.5 py-1 text-[10px] font-semibold shadow-lg">
-          <Star className="h-3 w-3" /> Most Valuable
+          <Star className="h-3 w-3" />{" "}
+          {cert.category === "internship" ? "Internship" : "Most Valuable"}
         </div>
       )}
 
