@@ -13,6 +13,7 @@ import {
   X,
   ExternalLink,
   Star,
+  Briefcase,
 } from "lucide-react";
 
 import intelBadge from "@/assets/certs/intel-ai-badge.jpeg.asset.json";
@@ -23,6 +24,7 @@ import mahotsav from "@/assets/certs/mahotsav.jpg.asset.json";
 import vbyld from "@/assets/certs/vbyld.jpg.asset.json";
 import promptEng from "@/assets/certs/prompt-engineering.png.asset.json";
 import be10x from "@/assets/certs/be10x.jpg.asset.json";
+import decodelabs from "@/assets/certs/decodelabs-internship.jpg.asset.json";
 
 type Cert = {
   id: string;
@@ -32,11 +34,23 @@ type Cert = {
   year: string;
   image: string;
   tags: string[];
-  category: "featured" | "leadership" | "additional";
+  category: "internship" | "featured" | "leadership" | "additional";
   mostValuable?: boolean;
 };
 
 const certs: Cert[] = [
+  {
+    id: "decodelabs-internship",
+    title: "Full Stack Development Virtual Internship",
+    issuer: "DecodeLabs",
+    description:
+      "Successfully completed a one-month Virtual Internship in Full Stack Development at DecodeLabs, gaining practical experience in modern web development, collaborative project workflows, and real-world software engineering practices. Duration: June 12, 2026 – July 12, 2026 · Issued: July 13, 2026.",
+    year: "2026",
+    image: decodelabs.url,
+    tags: ["Internship", "Full Stack Development", "Web Development"],
+    category: "internship",
+    mostValuable: true,
+  },
   {
     id: "ai-sashakt",
     title: "AI Sashakt Badge",
@@ -47,7 +61,6 @@ const certs: Cert[] = [
     image: intelBadge.url,
     tags: ["Featured", "AI", "Certification"],
     category: "featured",
-    mostValuable: true,
   },
   {
     id: "intel-nlp",
@@ -128,12 +141,13 @@ const certs: Cert[] = [
   },
 ];
 
+const internships = certs.filter((c) => c.category === "internship");
 const featured = certs.filter((c) => c.category === "featured");
 const leadership = certs.filter((c) => c.category === "leadership");
 const additional = certs.filter((c) => c.category === "additional");
 
 const stats = [
-  { value: "8+", label: "Certifications Earned" },
+  { value: "9+", label: "Certifications Earned" },
   { value: "4+", label: "AI Certifications" },
   { value: "2+", label: "Leadership Achievements" },
   { value: "∞", label: "Continuous Learner" },
@@ -149,6 +163,9 @@ function tagClass(tag: string) {
   if (t === "data structures")
     return "bg-cyan-400/10 text-cyan-300 border-cyan-400/30";
   if (t === "workshop") return "bg-sky-400/10 text-sky-300 border-sky-400/30";
+  if (t === "internship") return "bg-primary/15 text-primary border-primary/30";
+  if (t === "full stack development" || t === "web development")
+    return "bg-teal-400/10 text-teal-300 border-teal-400/30";
   return "bg-muted text-muted-foreground border-border";
 }
 
@@ -210,6 +227,18 @@ export function Certifications() {
               {s.label}
             </div>
           </div>
+        ))}
+      </div>
+
+      {/* Internship */}
+      <CategoryHeader
+        icon={Briefcase}
+        title="Internship Experience"
+        subtitle="Industry training & applied development"
+      />
+      <div className="grid sm:grid-cols-2 gap-5 mb-12">
+        {internships.map((c) => (
+          <CertCard key={c.id} cert={c} onView={open} prominent />
         ))}
       </div>
 
@@ -398,7 +427,8 @@ function CertCard({
 
       {cert.mostValuable && (
         <div className="absolute top-3 right-3 z-10 inline-flex items-center gap-1 rounded-full bg-primary text-primary-foreground px-2.5 py-1 text-[10px] font-semibold shadow-lg">
-          <Star className="h-3 w-3" /> Most Valuable
+          <Star className="h-3 w-3" />{" "}
+          {cert.category === "internship" ? "Internship" : "Most Valuable"}
         </div>
       )}
 
