@@ -163,6 +163,9 @@ function tagClass(tag: string) {
   if (t === "data structures")
     return "bg-cyan-400/10 text-cyan-300 border-cyan-400/30";
   if (t === "workshop") return "bg-sky-400/10 text-sky-300 border-sky-400/30";
+  if (t === "internship") return "bg-primary/15 text-primary border-primary/30";
+  if (t === "full stack development" || t === "web development")
+    return "bg-teal-400/10 text-teal-300 border-teal-400/30";
   return "bg-muted text-muted-foreground border-border";
 }
 
