@@ -13,6 +13,7 @@ import {
   X,
   ExternalLink,
   Star,
+  Briefcase,
 } from "lucide-react";
 
 import intelBadge from "@/assets/certs/intel-ai-badge.jpeg.asset.json";
@@ -146,7 +147,7 @@ const leadership = certs.filter((c) => c.category === "leadership");
 const additional = certs.filter((c) => c.category === "additional");
 
 const stats = [
-  { value: "8+", label: "Certifications Earned" },
+  { value: "9+", label: "Certifications Earned" },
   { value: "4+", label: "AI Certifications" },
   { value: "2+", label: "Leadership Achievements" },
   { value: "∞", label: "Continuous Learner" },
