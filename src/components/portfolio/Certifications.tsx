@@ -140,6 +140,7 @@ const certs: Cert[] = [
   },
 ];
 
+const internships = certs.filter((c) => c.category === "internship");
 const featured = certs.filter((c) => c.category === "featured");
 const leadership = certs.filter((c) => c.category === "leadership");
 const additional = certs.filter((c) => c.category === "additional");
