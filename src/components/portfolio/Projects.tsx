@@ -27,6 +27,7 @@ type Project = {
   status?: "under-development" | "live";
   repoAvailable?: boolean;
   ai?: boolean;
+  underDevelopment?: boolean;
   icon: React.ComponentType<{ className?: string }>;
   gradient: string;
 };
