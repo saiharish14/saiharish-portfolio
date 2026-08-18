@@ -172,6 +172,11 @@ function ProjectCard({ p, onStatus }: { p: Project; onStatus: () => void }) {
               <Wrench className="h-3 w-3" /> In Development
             </span>
           )}
+          {p.underDevelopment && (
+            <span className="inline-flex items-center gap-1 rounded-full bg-amber-500/15 backdrop-blur hairline border-amber-400/40 px-2 py-0.5 text-[10px] font-medium text-amber-300">
+              <Wrench className="h-3 w-3" /> Under Development
+            </span>
+          )}
         </div>
       </div>
 
