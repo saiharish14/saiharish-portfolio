@@ -47,6 +47,7 @@ const projects: Project[] = [
     ai: true,
     status: "live",
     repoAvailable: true,
+    underDevelopment: true,
     icon: Brain,
     gradient: "from-violet-500/30 via-cyan-400/10 to-transparent",
   },
